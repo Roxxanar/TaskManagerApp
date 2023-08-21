@@ -5,6 +5,8 @@ const cancelBtn = favDialog.querySelector("#cancelBtn");
 const form = document.getElementById("form");
 const tasks = [];
 const uncompletedTask = document.querySelector(".uncompletedTasks"); // Select the container for displaying tasks
+const completedTask = document.querySelector(".completedTasks"); // Select the container for displaying tasks
+markAsCompletedBtn = document.querySelector("#markascom");
 
 showButton.addEventListener("click", () => {
   favDialog.showModal();
@@ -27,6 +29,30 @@ function display(task) {
   <p><strong>Description:</strong> ${task.description} </p>
   <p><strong>Assignee:</strong> ${task.assignee} </p>
 `;
+
+  const newButton = document.createElement("button");
+  newButton.textContent = "Mark as completed";
+  newButton.classList.add("markascom");
+  newDiv.appendChild(newButton);
+
+  const newButton2 = document.createElement("button");
+  newButton.textContent = "Edit";
+  newButton.classList.add("edit");
+  newDiv.appendChild(newButton2);
+
+  const newButton3 = document.createElement("button");
+  newButton.textContent = "Delete";
+  newButton.classList.add("delete");
+  newDiv.appendChild(newButton3);
+}
+
+function mapTasks(tasks) {
+  const tasksNew = tasks.map((task, index) => {
+    return {
+      id: index + 1,
+      name: task,
+    };
+  });
 }
 
 confirmBtn.addEventListener("submit", function (event) {
@@ -50,10 +76,24 @@ confirmBtn.addEventListener("submit", function (event) {
   tasks.push(task);
   saveTask(tasks);
 
+  mapTasks(tasks);
+  console.log(tasksNew);
   form.reset();
 });
+
+function deleteTask(taskId) {
+  const deleteTasks = tasks.filter(task => task.id !== taskId);
+  saveTask(deleteTasks);
+}
 
 cancelBtn.addEventListener("click", () => {
   form.reset();
   favDialog.close();
 });
+
+// markAsCompletedBtn.addEventListener("click", () => {
+
+// tasks[id].status=true;
+// completedTask.appendChild(newDiv[id]);
+
+// });
