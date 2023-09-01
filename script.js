@@ -30,20 +30,21 @@ function display(task) {
   <p><strong>Assignee:</strong> ${task.assignee} </p>
 `;
 
-  const newButton = document.createElement("button");
-  newButton.textContent = "Mark as completed";
-  newButton.classList.add("markascom");
-  newDiv.appendChild(newButton);
+const newButton = document.createElement("button");
+newButton.textContent = "Mark as completed";
+newButton.classList.add("markascom");
+newDiv.appendChild(newButton);
 
-  const newButton2 = document.createElement("button");
-  newButton.textContent = "Edit";
-  newButton.classList.add("edit");
-  newDiv.appendChild(newButton2);
+const newButton2 = document.createElement("button");
+newButton2.textContent = "Edit"; 
+newButton2.classList.add("edit");
+newDiv.appendChild(newButton2);
 
-  const newButton3 = document.createElement("button");
-  newButton.textContent = "Delete";
-  newButton.classList.add("delete");
-  newDiv.appendChild(newButton3);
+const newButton3 = document.createElement("button");
+newButton3.textContent = "Delete"; 
+newButton3.classList.add("delete");
+newDiv.appendChild(newButton3);
+
 }
 
 function mapTasks(tasks) {
@@ -55,11 +56,17 @@ function mapTasks(tasks) {
   });
 }
 
-confirmBtn.addEventListener("click", function (event) {
+confirmBtn.addEventListener("click", () => {
+
+ form.reset();
+  favDialog.close();
+});  
+
+
+form.addEventListener("submit", (event) =>{
+
   
 event.preventDefault();
-
-form.addEventListener("submit", () =>{
 
   const title = document.querySelector('input[name="title"]').value;
   const description = document.querySelector(
@@ -73,6 +80,7 @@ form.addEventListener("submit", () =>{
   console.log("Assignee:", assignee);
 
   const task = { title, description, assignee, status };
+  console.log(task);
 
   display(task);
 
@@ -80,14 +88,12 @@ form.addEventListener("submit", () =>{
   saveTask(tasks);
 
   mapTasks(tasks);
-  console.log(tasksNew);
+  // console.log(tasksNew);
 
 });
 
 
-  form.reset();
-  favDialog.close();
-});
+ 
 
 
 
