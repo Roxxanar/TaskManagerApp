@@ -55,7 +55,7 @@ function mapTasks(tasks) {
   });
 }
 
-confirmBtn.addEventListener("submit", function (event) {
+confirmBtn.addEventListener("click", function (event) {
   event.preventDefault();
 
   const title = document.querySelector('input[name="title"]').value;
@@ -79,6 +79,7 @@ confirmBtn.addEventListener("submit", function (event) {
   mapTasks(tasks);
   console.log(tasksNew);
   form.reset();
+  favDialog.close();
 });
 
 function deleteTask(taskId) {
