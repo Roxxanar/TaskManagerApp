@@ -56,7 +56,10 @@ function mapTasks(tasks) {
 }
 
 confirmBtn.addEventListener("click", function (event) {
-  event.preventDefault();
+  
+event.preventDefault();
+
+form.addEventListener("submit", () =>{
 
   const title = document.querySelector('input[name="title"]').value;
   const description = document.querySelector(
@@ -78,9 +81,15 @@ confirmBtn.addEventListener("click", function (event) {
 
   mapTasks(tasks);
   console.log(tasksNew);
+
+});
+
+
   form.reset();
   favDialog.close();
 });
+
+
 
 function deleteTask(taskId) {
   const deleteTasks = tasks.filter(task => task.id !== taskId);
